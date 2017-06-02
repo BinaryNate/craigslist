@@ -1,8 +1,11 @@
 import Craigslist from './src/Craigslist';
+import Category from './src/enums/Category';
 
-let craigslist = new Craigslist();
+let craigslist = new Craigslist({ city: 'indianapolis' });
 
-craigslist.search()
+craigslist.search({
+    category: Category.FREE
+})
 .then(result => {
     debugger;
 })
