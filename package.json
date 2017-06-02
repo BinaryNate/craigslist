@@ -1,0 +1,23 @@
+{
+  "name": "craigslist",
+  "version": "0.0.1",
+  "description": "JavaScript Craigslist API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BinaryNate/craigslist.git"
+  },
+  "keywords": [
+    "craigslist",
+    "search"
+  ],
+  "author": "Nathan Hill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BinaryNate/craigslist/issues"
+  },
+  "homepage": "https://github.com/BinaryNate/craigslist#readme"
+}
