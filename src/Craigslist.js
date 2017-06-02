@@ -1,5 +1,6 @@
 import request from 'request-promise-native';
 import { validate, validateAsync } from 'parameter-validator';
+import HtmlParser from './HtmlParser';
 import Category from './enums/Category';
 
 class Craigslist {
@@ -9,6 +10,8 @@ class Craigslist {
         validate(options, [
             'city'
         ], this, { addPrefix: '_' });
+
+        this._htmlParser = new HtmlParser();
     }
 
     /**
@@ -24,15 +27,16 @@ class Craigslist {
         }])
         .then(({ category }) => {
 
-            let categoryCode = Category[category];
-
-            return request(`https://${this._city}.craigslist.org/search/${categoryCode}`, {
+            return request({
+                uri: `https://${this._city}.craigslist.org/search/${category}`,
                 qs: {
                     query: options.query || null
                 }
             });
-        });
+        })
+        .then(html => this._htmlParser.parseSearchResults(html));
     }
+
 }
 
 export default Craigslist;

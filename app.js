@@ -4,10 +4,11 @@ import Category from './src/enums/Category';
 let craigslist = new Craigslist({ city: 'indianapolis' });
 
 craigslist.search({
-    category: Category.FREE
+    category: Category.FREE,
+    query: 'cat'
 })
 .then(result => {
-    debugger;
+
 })
 .catch(error => {
     console.log(`An error occurred: ${error.name}, ${error.message}\n${error.stack}`);
