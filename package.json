@@ -4,7 +4,8 @@
   "description": "JavaScript Craigslist API.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint src"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/BinaryNate/craigslist/issues"
   },
-  "homepage": "https://github.com/BinaryNate/craigslist#readme"
+  "homepage": "https://github.com/BinaryNate/craigslist#readme",
+  "dependencies": {
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "jshint": "^2.9.4"
+  }
 }
