@@ -1,5 +1,5 @@
-import Craigslist from './src/Craigslist';
-import Category from './src/enums/Category';
+import Craigslist from '../src/Craigslist';
+import Category from '../src/enums/Category';
 
 let cl = new Craigslist({ city: 'indianapolis' });
 

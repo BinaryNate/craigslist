@@ -4,8 +4,8 @@
   "description": "JavaScript Craigslist API.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "jshint src"
+    "lint": "jshint src",
+    "build": "npm run lint && rm -rf dist && babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
