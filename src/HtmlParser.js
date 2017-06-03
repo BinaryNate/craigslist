@@ -5,23 +5,26 @@ const SEARCH_ROW_SELECTOR = '.result-row',
       SEARCH_TITLE_SELECTOR = '.result-title',
       SEARCH_IMAGE_SELECTOR = '.result-image',
       POST_TITLE_SELECTOR = '#titletextonly',
-      POST_LOCATION_SELECTOR = '.postingtitle small';
+      POST_LOCATION_SELECTOR = '.postingtitle small',
+      POST_DESCRIPTION_SELECTOR = '#postingbody';
 
 export default class HtmlParser {
 
     /**
-    * @param   {string} html
+    * @param   {string}       html
+    * @param   {SearchResult} searchResult
     * @returns {Post}
     * @private
     */
-    parsePost(html) {
+    parsePost(html, { postUrl, imageUrls }) {
 
-        debugger;
-
-        let url = $('link[rel="canonical"]', html).attr('href');
-        let title = $(POST_TITLE_SELECTOR, html).text();
-        let location = this._removeParentheses($(POST_LOCATION_SELECTOR, html).text());
-
+        return {
+            url: postUrl,
+            imageUrls,
+            title: $(POST_TITLE_SELECTOR, html).text(),
+            location: this._removeParentheses($(POST_LOCATION_SELECTOR, html).text()),
+            description: $(POST_DESCRIPTION_SELECTOR, html)[0].children[2].data
+        };
     }
 
     /**
@@ -58,12 +61,13 @@ export default class HtmlParser {
         let imageElement = $(SEARCH_IMAGE_SELECTOR, resultRow)[0],
             serializedIds = $(imageElement).data('ids') || '',
             imageIds = serializedIds.split(',').map(numberPlusId => numberPlusId.split(':')[1]),
-            thumbnailUrls = imageIds.map(id => `${protocol}//images.${hostnameWithoutSubdomain}/${id}_300x300.jpg`);
+            // The thumbnails on the page are actually 300x300, but let's go ahead and get the larger versions.
+            imageUrls = imageIds.map(id => `${protocol}//images.${hostnameWithoutSubdomain}/${id}_600x450.jpg`);
 
         return {
             title,
             postUrl,
-            thumbnailUrls
+            imageUrls
         };
     }
 

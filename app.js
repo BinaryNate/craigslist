@@ -8,7 +8,6 @@ cl.search({
     query: 'cat'
 })
 .then(searchResults => {
-    debugger;
     return cl.getPost({ searchResult: searchResults[0] });
 })
 .then(post => {

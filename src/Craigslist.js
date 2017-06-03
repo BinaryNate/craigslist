@@ -1,15 +1,8 @@
 import request from 'request-promise-native';
 import { validate, validateAsync } from 'parameter-validator';
 import HtmlParser from './HtmlParser';
+import SearchResult from './SearchResult';
 import Category from './enums/Category';
-
-/**
-* @interface SearchResult
-*
-* @property {string}         title
-* @property {Array.<string>} thumbnailUrls
-* @property {string}         postUrl
-*/
 
 /**
 * @interface Post
@@ -60,9 +53,14 @@ class Craigslist {
     */
     getPost(options) {
 
+        let searchResult;
+
         return validateAsync(options, [ 'searchResult' ])
-        .then(({ searchResult }) => request(searchResult.postUrl))
-        .then(html => this._htmlParser.parsePost(html));
+        .then(() => {
+            searchResult = new SearchResult(options.searchResult);
+            return request(searchResult.postUrl);
+        })
+        .then(html => this._htmlParser.parsePost(html, searchResult));
     }
 }
 
